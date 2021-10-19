@@ -1,4 +1,4 @@
-package com.sshevtsov.pictureoftheday.ui.picture
+package com.sshevtsov.pictureoftheday.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
 
-class PictureOfTheDayFragment : Fragment() {
+class MainFragment : Fragment() {
 
     companion object {
-        fun newInstance(): PictureOfTheDayFragment = PictureOfTheDayFragment()
+        fun newInstance(): MainFragment = MainFragment()
     }
 
     private var _binding: MainFragmentBinding? = null

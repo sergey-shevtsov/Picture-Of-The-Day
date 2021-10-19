@@ -3,7 +3,7 @@ package com.sshevtsov.pictureoftheday.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sshevtsov.pictureoftheday.R
-import com.sshevtsov.pictureoftheday.ui.picture.PictureOfTheDayFragment
+import com.sshevtsov.pictureoftheday.ui.main.MainFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.container, PictureOfTheDayFragment.newInstance())
+                .replace(R.id.container, MainFragment.newInstance())
                 .commit()
         }
     }
