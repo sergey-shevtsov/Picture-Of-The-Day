@@ -4,13 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import coil.api.load
+import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
+import java.util.*
 
 class MainFragment : Fragment() {
 
     companion object {
         fun newInstance(): MainFragment = MainFragment()
+    }
+
+    private val viewModel: PictureOfTheDayViewModel by lazy {
+        ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
 
     private var _binding: MainFragmentBinding? = null
@@ -24,5 +33,52 @@ class MainFragment : Fragment() {
         _binding = MainFragmentBinding.inflate(inflater, container, false)
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setChipsListener()
+
+        viewModel.getData(System.currentTimeMillis())
+            .observe(viewLifecycleOwner) { renderData(it) }
+    }
+
+    private fun setChipsListener() {
+        binding.chipGroup.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.chip_today -> {
+                    viewModel.getData(System.currentTimeMillis())
+                }
+                R.id.chip_yesterday -> {
+                    val calendar = Calendar.getInstance()
+                    calendar.add(Calendar.DATE, -1)
+                    viewModel.getData(calendar.timeInMillis)
+                }
+                R.id.chip_before_yesterday -> {
+                    val calendar = Calendar.getInstance()
+                    calendar.add(Calendar.DATE, -2)
+                    viewModel.getData(calendar.timeInMillis)
+                }
+            }
+        }
+    }
+
+    private fun renderData(data: PictureOfTheDayData) {
+        when (data) {
+            is PictureOfTheDayData.Success -> {
+                binding.imageView.load(data.serverResponseData.url) {
+                    lifecycle(this@MainFragment)
+                    error(R.drawable.ic_load_error_vector)
+                    placeholder(R.drawable.ic_no_photo_vector)
+                }
+            }
+            is PictureOfTheDayData.Loading -> {
+                binding.imageView.load(R.drawable.ic_no_photo_vector)
+            }
+            is PictureOfTheDayData.Error -> {
+                binding.imageView.load(R.drawable.ic_load_error_vector)
+            }
+        }
     }
 }
