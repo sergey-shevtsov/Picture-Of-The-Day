@@ -100,4 +100,8 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <include
+        android:id="@+id/bottom_sheet_include"
+        layout="@layout/main_bottom_sheet"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
