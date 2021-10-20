@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
 import java.util.*
@@ -25,6 +26,8 @@ class MainFragment : Fragment() {
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,6 +42,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setChipsListener()
+        setBottomSheetBehavior(binding.bottomSheetInclude.bottomSheetContainer)
 
         viewModel.getData(System.currentTimeMillis())
             .observe(viewLifecycleOwner) { renderData(it) }
@@ -64,17 +68,30 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+    }
+
     private fun renderData(data: PictureOfTheDayData) {
         when (data) {
             is PictureOfTheDayData.Success -> {
-                binding.imageView.load(data.serverResponseData.url) {
-                    lifecycle(this@MainFragment)
-                    error(R.drawable.ic_load_error_vector)
-                    placeholder(R.drawable.ic_no_photo_vector)
+                binding.apply {
+                    imageView.load(data.serverResponseData.url) {
+                        lifecycle(this@MainFragment)
+                        error(R.drawable.ic_load_error_vector)
+                        placeholder(R.drawable.ic_no_photo_vector)
+                    }
+                    bottomSheetInclude.bottomSheetHeader.text =
+                        data.serverResponseData.title
+                    bottomSheetInclude.bottomSheetDescription.text =
+                        data.serverResponseData.explanation
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                 }
             }
             is PictureOfTheDayData.Loading -> {
                 binding.imageView.load(R.drawable.ic_no_photo_vector)
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
             }
             is PictureOfTheDayData.Error -> {
                 binding.imageView.load(R.drawable.ic_load_error_vector)
