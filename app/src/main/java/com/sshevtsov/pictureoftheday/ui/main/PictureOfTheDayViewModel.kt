@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sshevtsov.pictureoftheday.BuildConfig
+import com.sshevtsov.pictureoftheday.util.convertToNasaApiDate
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -13,8 +14,8 @@ class PictureOfTheDayViewModel(
     private val retrofitImpl: PODRetrofitImpl = PODRetrofitImpl()
 ) : ViewModel() {
 
-    fun getData(date: String): LiveData<PictureOfTheDayData> {
-        sendServerRequest(date)
+    fun getData(date: Long): LiveData<PictureOfTheDayData> {
+        sendServerRequest(date.convertToNasaApiDate())
         return liveDataToObserve
     }
 
