@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/bottom_app_bar_image_description"
+        android:icon="@drawable/ic_outline_description_24"
+        android:title="@string/bottom_app_bar_description"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/bottom_app_bar_favorites"
         android:icon="@drawable/ic_outline_favorite_border_24"
         android:title="@string/app_bar_favorites"
