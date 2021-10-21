@@ -10,6 +10,11 @@ import com.google.android.material.navigation.NavigationView
 import com.sshevtsov.pictureoftheday.R
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
+
+    companion object {
+        const val TAG = "BottomNavigationDrawer"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

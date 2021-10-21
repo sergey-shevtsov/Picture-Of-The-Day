@@ -61,7 +61,10 @@ class MainFragment : Fragment() {
     private fun setBottomAppBarListeners() {
         binding.bottomAppBar.setNavigationOnClickListener {
             activity?.let {
-                BottomNavigationDrawerFragment().show(it.supportFragmentManager, null)
+                BottomNavigationDrawerFragment().show(
+                    it.supportFragmentManager,
+                    BottomNavigationDrawerFragment.TAG
+                )
             }
         }
         binding.bottomAppBar.setOnMenuItemClickListener {
