@@ -110,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:backgroundTint="@color/purple_500"
+        app:menu="@menu/menu_bottom_app_bar"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

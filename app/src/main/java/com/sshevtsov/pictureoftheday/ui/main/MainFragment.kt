@@ -3,9 +3,8 @@ package com.sshevtsov.pictureoftheday.ui.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -40,15 +39,39 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_app_bar, menu)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setBottomAppBarListeners()
         setChipsListener()
         setBottomSheetBehavior(binding.bottomSheetInclude.bottomSheetContainer)
         setSearchWikiListener()
 
+
+
         viewModel.getData(System.currentTimeMillis())
             .observe(viewLifecycleOwner) { renderData(it) }
+    }
+
+    private fun setBottomAppBarListeners() {
+        binding.bottomAppBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.bottom_app_bar_favorites -> {
+                    Toast.makeText(context, "Favorites", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                R.id.bottom_app_bar_settings -> {
+                    Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun setChipsListener() {
@@ -79,7 +102,8 @@ class MainFragment : Fragment() {
     private fun setSearchWikiListener() {
         binding.inputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data = Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
             })
         }
     }
