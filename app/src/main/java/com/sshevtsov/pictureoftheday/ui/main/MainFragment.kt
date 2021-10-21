@@ -29,6 +29,8 @@ class MainFragment : Fragment() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
+    private var switchImageInProcess = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -52,8 +54,6 @@ class MainFragment : Fragment() {
         setBottomSheetBehavior(binding.bottomSheetInclude.bottomSheetContainer)
         setSearchWikiListener()
 
-
-
         viewModel.getData(System.currentTimeMillis())
             .observe(viewLifecycleOwner) { renderData(it) }
     }
@@ -70,13 +70,8 @@ class MainFragment : Fragment() {
         binding.bottomAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.bottom_app_bar_image_description -> {
-                    if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN) {
-                        binding.bottomSheetInclude.apply {
-                            if (bottomSheetHeader.text.isNotBlank() && bottomSheetDescription.text.isNotBlank()) {
-                                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                            }
-                        }
-                    }
+                    binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar)
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
                     true
                 }
                 R.id.bottom_app_bar_favorites -> {
@@ -94,6 +89,10 @@ class MainFragment : Fragment() {
 
     private fun setChipsListener() {
         binding.chipGroup.setOnCheckedChangeListener { _, checkedId ->
+
+            switchImageInProcess = true
+            binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar)
+
             when (checkedId) {
                 R.id.chip_today -> {
                     viewModel.getData(System.currentTimeMillis())
@@ -115,6 +114,19 @@ class MainFragment : Fragment() {
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_HIDDEN && !switchImageInProcess) {
+                    binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar_additional)
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                //do nothing
+            }
+
+        })
     }
 
     private fun setSearchWikiListener() {
@@ -140,6 +152,7 @@ class MainFragment : Fragment() {
                     bottomSheetInclude.bottomSheetDescription.text =
                         data.serverResponseData.explanation
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    switchImageInProcess = false
                 }
             }
             is PictureOfTheDayData.Loading -> {
