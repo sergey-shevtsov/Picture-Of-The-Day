@@ -55,7 +55,7 @@
                 android:id="@+id/chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/main_chip_group_margin_top"
                 app:layout_constraintEnd_toEndOf="@id/constraint_end"
                 app:layout_constraintStart_toStartOf="@id/constraint_start"
                 app:layout_constraintTop_toBottomOf="@id/input_layout"
@@ -92,8 +92,8 @@
                 android:layout_height="@dimen/main_image_height"
                 android:layout_marginTop="@dimen/main_image_margin_top"
                 android:contentDescription="@string/photo_of_the_day_stub"
-                app:layout_constraintEnd_toEndOf="@id/constraint_end"
-                app:layout_constraintStart_toStartOf="@id/constraint_start"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/chip_group"
                 app:srcCompat="@drawable/ic_no_photo_vector" />
 
