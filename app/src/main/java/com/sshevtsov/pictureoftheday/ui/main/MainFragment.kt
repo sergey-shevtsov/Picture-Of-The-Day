@@ -69,6 +69,16 @@ class MainFragment : Fragment() {
         }
         binding.bottomAppBar.setOnMenuItemClickListener {
             when (it.itemId) {
+                R.id.bottom_app_bar_image_description -> {
+                    if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN) {
+                        binding.bottomSheetInclude.apply {
+                            if (bottomSheetHeader.text.isNotBlank() && bottomSheetDescription.text.isNotBlank()) {
+                                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                            }
+                        }
+                    }
+                    true
+                }
                 R.id.bottom_app_bar_favorites -> {
                     Toast.makeText(context, "Favorites", Toast.LENGTH_SHORT).show()
                     true
