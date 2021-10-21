@@ -6,4 +6,6 @@
     <string name="yesterday">Вчера</string>
     <string name="today">Сегодня</string>
     <string name="photo_of_the_day_stub">Photo of the day</string>
+    <string name="app_bar_settings">Настройки</string>
+    <string name="app_bar_favorites">Избранное</string>
 </resources>
