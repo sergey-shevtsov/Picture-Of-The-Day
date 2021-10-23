@@ -9,4 +9,6 @@
     <string name="app_bar_settings">Настройки</string>
     <string name="app_bar_favorites">Избранное</string>
     <string name="bottom_app_bar_description">Описание</string>
+    <string name="dark_mode">Режим затемнения</string>
+    <string name="settings_header">Настройки</string>
 </resources>
