@@ -6,10 +6,6 @@
     style="@style/MainBottomSheetDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/main_bottom_sheet_padding"
-    android:paddingEnd="@dimen/main_bottom_sheet_padding"
-    app:behavior_hideable="true"
-    app:behavior_peekHeight="@dimen/main_bottom_sheet_peek_height"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <View

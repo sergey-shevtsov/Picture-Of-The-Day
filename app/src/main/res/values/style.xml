@@ -2,6 +2,9 @@
 <resources>
     <style name="MainBottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="android:background">?attr/bottomSheetDialogBackgroundColor</item>
+        <item name="android:paddingStart">@dimen/main_bottom_sheet_padding</item>
+        <item name="behavior_hideable">true</item>
+        <item name="behavior_peekHeight">@dimen/main_bottom_sheet_peek_height</item>
     </style>
     <style name="Header">
         <item name="android:textStyle">bold</item>
