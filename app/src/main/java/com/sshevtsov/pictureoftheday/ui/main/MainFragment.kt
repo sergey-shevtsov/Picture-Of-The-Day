@@ -12,6 +12,7 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
+import com.sshevtsov.pictureoftheday.ui.settings.SettingsFragment
 import java.util.*
 
 class MainFragment : Fragment() {
@@ -79,7 +80,11 @@ class MainFragment : Fragment() {
                     true
                 }
                 R.id.bottom_app_bar_settings -> {
-                    Toast.makeText(context, "Settings", Toast.LENGTH_SHORT).show()
+                    requireActivity().supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, SettingsFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit()
                     true
                 }
                 else -> false
