@@ -12,4 +12,10 @@
     <style name="Header.BottomSheetDialogHeader">
         <item name="android:textColor">?attr/bottomSheetDialogHeaderTextColor</item>
     </style>
+    <style name="BottomSheetLine">
+        <item name="android:layout_width">@dimen/bottom_sheet_line_width</item>
+        <item name="android:layout_height">@dimen/bottom_sheet_line_height</item>
+        <item name="android:layout_marginTop">@dimen/bottom_sheet_line_margin_top</item>
+        <item name="android:background">@color/bottom_sheet_line_color</item>
+    </style>
 </resources>
