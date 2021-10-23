@@ -3,4 +3,10 @@
     <style name="MainBottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog">
         <item name="android:background">?attr/bottomSheetDialogBackgroundColor</item>
     </style>
+    <style name="Header">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="Header.BottomSheetDialogHeader">
+        <item name="android:textColor">?attr/bottomSheetDialogHeaderTextColor</item>
+    </style>
 </resources>
