@@ -52,9 +52,11 @@ class MainFragment : Fragment() {
 
         binding.chipFilterDescription.setOnCheckedChangeListener { _, isChecked ->
             requireActivity().saveBooleanSettingInSharedPref(POD_DESCRIPTION_MODE_KEY, isChecked)
+            requireActivity().recreate()
         }
         binding.chipFilterHdQuality.setOnCheckedChangeListener { _, isChecked ->
             requireActivity().saveBooleanSettingInSharedPref(POD_HD_MODE_KEY, isChecked)
+            requireActivity().recreate()
         }
     }
 
