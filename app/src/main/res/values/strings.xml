@@ -11,4 +11,5 @@
     <string name="bottom_app_bar_description">Описание</string>
     <string name="dark_mode">Режим затемнения</string>
     <string name="settings_header">Настройки</string>
+    <string name="pod_header_text">Изображение дня от NASA</string>
 </resources>

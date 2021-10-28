@@ -45,7 +45,6 @@ class MainFragment : Fragment() {
 
         setChipsListener()
         setBottomSheetBehavior(binding.bottomSheetInclude.bottomSheetContainer)
-        setSearchWikiListener()
 
         viewModel.getData(System.currentTimeMillis())
             .observe(viewLifecycleOwner) { renderData(it) }
@@ -77,15 +76,6 @@ class MainFragment : Fragment() {
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-    }
-
-    private fun setSearchWikiListener() {
-        binding.inputLayout.setEndIconOnClickListener {
-            startActivity(Intent(Intent.ACTION_VIEW).apply {
-                data =
-                    Uri.parse("https://en.wikipedia.org/wiki/${binding.inputEditText.text.toString()}")
-            })
-        }
     }
 
     private fun renderData(data: PictureOfTheDayData) {
