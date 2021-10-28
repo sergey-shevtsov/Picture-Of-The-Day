@@ -13,4 +13,5 @@
     <dimen name="main_chip_group_margin_top">20dp</dimen>
     <dimen name="settings_header_margin_top">10dp</dimen>
     <dimen name="pod_header_margin_top">4dp</dimen>
+    <dimen name="pod_tab_layout_margin_top">8dp</dimen>
 </resources>

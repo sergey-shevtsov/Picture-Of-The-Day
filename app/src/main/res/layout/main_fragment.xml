@@ -44,31 +44,21 @@
             android:layout_marginTop="@dimen/main_chip_group_margin_top"
             app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintStart_toStartOf="@id/constraint_start"
-            app:layout_constraintTop_toBottomOf="@id/header"
-            app:selectionRequired="true"
-            app:singleSelection="true">
+            app:layout_constraintTop_toBottomOf="@id/header">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_before_yesterday"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:id="@+id/chip_filter_description"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/before_yesterday" />
+                android:text="@string/with_description" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_yesterday"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:id="@+id/chip_filter_hd_quality"
+                style="@style/Widget.MaterialComponents.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yesterday" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_today"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/today" />
+                android:text="@string/hd_quality" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -76,6 +66,7 @@
             android:id="@+id/tab_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pod_tab_layout_margin_top"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chip_group" />

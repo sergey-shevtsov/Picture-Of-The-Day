@@ -12,4 +12,6 @@
     <string name="dark_mode">Режим затемнения</string>
     <string name="settings_header">Настройки</string>
     <string name="pod_header_text">Изображение дня от NASA</string>
+    <string name="with_description">С описанием</string>
+    <string name="hd_quality">HD-качество</string>
 </resources>
