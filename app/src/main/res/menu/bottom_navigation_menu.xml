@@ -16,4 +16,9 @@
         android:icon="@drawable/ic_screen_three"
         android:title="Page 3" />
 
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_outline_settings_24"
+        android:title="@string/settings" />
+
 </menu>
