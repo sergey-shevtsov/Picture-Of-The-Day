@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.ActivityMainBinding
 import com.sshevtsov.pictureoftheday.ui.main.MainFragment
+import com.sshevtsov.pictureoftheday.ui.mars.MarsFragment
 import com.sshevtsov.pictureoftheday.ui.settings.SettingsFragment
 import com.sshevtsov.pictureoftheday.util.DARK_MODE_KEY
 import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
@@ -16,10 +17,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setSavedTheme()
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        setSavedTheme()
         initBottomNavigation()
 
         if (savedInstanceState == null) {
@@ -41,6 +42,10 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.mars -> {
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, MarsFragment.newInstance())
+                        .commit()
                     true
                 }
                 R.id.settings -> {
