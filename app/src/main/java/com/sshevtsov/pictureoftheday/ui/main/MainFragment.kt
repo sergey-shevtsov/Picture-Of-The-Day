@@ -20,6 +20,10 @@ class MainFragment : Fragment() {
         fun newInstance(): MainFragment = MainFragment()
     }
 
+    private val viewPagerAdapter: PODViewPagerAdapter by lazy {
+        PODViewPagerAdapter(requireActivity())
+    }
+
     private var _binding: MainFragmentBinding? = null
     private val binding get() = _binding!!
 
@@ -55,7 +59,7 @@ class MainFragment : Fragment() {
     }
 
     private fun initViewPager() {
-        binding.viewPager.adapter = PODViewPagerAdapter(requireActivity())
+        binding.viewPager.adapter = viewPagerAdapter
         binding.viewPager.currentItem = 2
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->

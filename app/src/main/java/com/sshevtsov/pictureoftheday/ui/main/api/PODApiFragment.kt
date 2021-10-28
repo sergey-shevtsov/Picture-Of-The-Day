@@ -11,6 +11,9 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.PodApiFragmentBinding
+import com.sshevtsov.pictureoftheday.util.POD_DESCRIPTION_MODE_KEY
+import com.sshevtsov.pictureoftheday.util.POD_HD_MODE_KEY
+import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
 
 class PODApiFragment : Fragment() {
 
@@ -26,6 +29,9 @@ class PODApiFragment : Fragment() {
     private val viewModel: PictureOfTheDayViewModel by lazy {
         ViewModelProvider(this).get(PictureOfTheDayViewModel::class.java)
     }
+
+    private var showDescriptionSetting: Boolean = true
+    private var hdQualitySetting: Boolean = false
 
     private var _binding: PodApiFragmentBinding? = null
     private val binding get() = _binding!!
@@ -46,6 +52,11 @@ class PODApiFragment : Fragment() {
 
         setBottomSheetBehavior(binding.bottomSheetInclude.bottomSheetContainer)
 
+        showDescriptionSetting =
+            requireActivity().getBooleanSettingFromSharedPref(POD_DESCRIPTION_MODE_KEY)
+        hdQualitySetting =
+            requireActivity().getBooleanSettingFromSharedPref(POD_HD_MODE_KEY)
+
         val date = arguments?.getLong(DATE_EXTRA_KEY)
         viewModel.getData(date!!).observe(viewLifecycleOwner) {
             renderData(it)
@@ -61,16 +72,25 @@ class PODApiFragment : Fragment() {
         when (data) {
             is PictureOfTheDayData.Success -> {
                 binding.apply {
-                    imageView.load(data.serverResponseData.url) {
+                    val url = if (hdQualitySetting) {
+                        data.serverResponseData.hdurl
+                    } else {
+                        data.serverResponseData.url
+                    }
+
+                    imageView.load(url) {
                         lifecycle(this@PODApiFragment)
                         error(R.drawable.ic_load_error_vector)
                         placeholder(R.drawable.ic_no_photo_vector)
                     }
-                    bottomSheetInclude.bottomSheetHeader.text =
-                        data.serverResponseData.title
-                    bottomSheetInclude.bottomSheetDescription.text =
-                        data.serverResponseData.explanation
-                    bottomSheetDialog.state = BottomSheetBehavior.STATE_COLLAPSED
+
+                    if (showDescriptionSetting) {
+                        bottomSheetInclude.bottomSheetHeader.text =
+                            data.serverResponseData.title
+                        bottomSheetInclude.bottomSheetDescription.text =
+                            data.serverResponseData.explanation
+                        bottomSheetDialog.state = BottomSheetBehavior.STATE_COLLAPSED
+                    }
                 }
             }
             is PictureOfTheDayData.Loading -> {
