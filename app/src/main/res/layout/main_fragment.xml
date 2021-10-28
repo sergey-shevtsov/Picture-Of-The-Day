@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/constraint_start"
@@ -27,13 +28,14 @@
             android:id="@+id/header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/pod_header_margin_top"
             android:gravity="center"
             android:text="@string/pod_header_text"
-            android:layout_marginTop="@dimen/pod_header_margin_top"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintStart_toStartOf="@id/constraint_start"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Заголовок" />
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group"
@@ -70,21 +72,15 @@
 
         </com.google.android.material.chip.ChipGroup>
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_view"
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager"
             android:layout_width="0dp"
-            android:layout_height="@dimen/main_image_height"
-            android:layout_marginTop="@dimen/main_image_margin_top"
-            android:contentDescription="@string/photo_of_the_day_stub"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chip_group"
-            app:srcCompat="@drawable/ic_no_photo_vector" />
+            app:layout_constraintTop_toBottomOf="@id/chip_group" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <include
-        android:id="@+id/bottom_sheet_include"
-        layout="@layout/main_bottom_sheet" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
