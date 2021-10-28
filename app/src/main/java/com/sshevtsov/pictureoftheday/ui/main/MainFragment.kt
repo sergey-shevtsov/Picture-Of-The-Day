@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,7 +11,6 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
-import com.sshevtsov.pictureoftheday.ui.settings.SettingsFragment
 import java.util.*
 
 class MainFragment : Fragment() {
@@ -42,15 +40,9 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_bottom_app_bar, menu)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setBottomAppBarListeners()
         setChipsListener()
         setBottomSheetBehavior(binding.bottomSheetInclude.bottomSheetContainer)
         setSearchWikiListener()
@@ -59,44 +51,10 @@ class MainFragment : Fragment() {
             .observe(viewLifecycleOwner) { renderData(it) }
     }
 
-    private fun setBottomAppBarListeners() {
-        binding.bottomAppBar.setNavigationOnClickListener {
-            activity?.let {
-                BottomNavigationDrawerFragment().show(
-                    it.supportFragmentManager,
-                    BottomNavigationDrawerFragment.TAG
-                )
-            }
-        }
-        binding.bottomAppBar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.bottom_app_bar_image_description -> {
-                    binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar)
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                    true
-                }
-                R.id.bottom_app_bar_favorites -> {
-                    Toast.makeText(context, "Favorites", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                R.id.bottom_app_bar_settings -> {
-                    requireActivity().supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.container, SettingsFragment.newInstance())
-                        .addToBackStack(null)
-                        .commit()
-                    true
-                }
-                else -> false
-            }
-        }
-    }
-
     private fun setChipsListener() {
         binding.chipGroup.setOnCheckedChangeListener { _, checkedId ->
 
             switchImageInProcess = true
-            binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar)
 
             when (checkedId) {
                 R.id.chip_today -> {
@@ -119,19 +77,6 @@ class MainFragment : Fragment() {
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_HIDDEN && !switchImageInProcess) {
-                    binding.bottomAppBar.replaceMenu(R.menu.menu_bottom_app_bar_additional)
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                //do nothing
-            }
-
-        })
     }
 
     private fun setSearchWikiListener() {
