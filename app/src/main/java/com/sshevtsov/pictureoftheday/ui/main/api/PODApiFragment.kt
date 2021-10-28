@@ -30,7 +30,7 @@ class PODApiFragment : Fragment() {
     private var _binding: PodApiFragmentBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var bottomSheetDialog: BottomSheetBehavior<ConstraintLayout>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,8 +53,8 @@ class PODApiFragment : Fragment() {
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+        bottomSheetDialog = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetDialog.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     private fun renderData(data: PictureOfTheDayData) {
@@ -70,12 +70,12 @@ class PODApiFragment : Fragment() {
                         data.serverResponseData.title
                     bottomSheetInclude.bottomSheetDescription.text =
                         data.serverResponseData.explanation
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    bottomSheetDialog.state = BottomSheetBehavior.STATE_COLLAPSED
                 }
             }
             is PictureOfTheDayData.Loading -> {
                 binding.imageView.load(R.drawable.ic_no_photo_vector)
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+                bottomSheetDialog.state = BottomSheetBehavior.STATE_HIDDEN
             }
             is PictureOfTheDayData.Error -> {
                 binding.imageView.load(R.drawable.ic_load_error_vector)
