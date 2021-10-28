@@ -18,4 +18,7 @@
         <item name="android:layout_marginTop">@dimen/bottom_sheet_line_margin_top</item>
         <item name="android:background">@color/bottom_sheet_line_color</item>
     </style>
+    <style name="BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="backgroundTint">?attr/colorPrimary</item>
+    </style>
 </resources>
