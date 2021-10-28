@@ -1,4 +1,4 @@
-package com.sshevtsov.pictureoftheday.ui.main
+package com.sshevtsov.pictureoftheday.ui.main.api
 
 import retrofit2.Call
 import retrofit2.http.GET

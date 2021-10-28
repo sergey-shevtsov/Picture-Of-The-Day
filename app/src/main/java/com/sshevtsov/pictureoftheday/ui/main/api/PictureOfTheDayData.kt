@@ -1,4 +1,4 @@
-package com.sshevtsov.pictureoftheday.ui.main
+package com.sshevtsov.pictureoftheday.ui.main.api
 
 sealed class PictureOfTheDayData {
     object Loading : PictureOfTheDayData()

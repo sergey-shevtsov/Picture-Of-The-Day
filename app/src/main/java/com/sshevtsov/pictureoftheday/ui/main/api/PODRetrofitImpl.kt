@@ -1,4 +1,4 @@
-package com.sshevtsov.pictureoftheday.ui.main
+package com.sshevtsov.pictureoftheday.ui.main.api
 
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor

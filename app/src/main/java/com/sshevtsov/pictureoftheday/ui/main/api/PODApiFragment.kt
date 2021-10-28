@@ -11,8 +11,6 @@ import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.PodApiFragmentBinding
-import com.sshevtsov.pictureoftheday.ui.main.PictureOfTheDayData
-import com.sshevtsov.pictureoftheday.ui.main.PictureOfTheDayViewModel
 
 class PODApiFragment : Fragment() {
 

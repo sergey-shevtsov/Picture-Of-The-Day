@@ -1,4 +1,4 @@
-package com.sshevtsov.pictureoftheday.ui.main
+package com.sshevtsov.pictureoftheday.ui.main.api
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
