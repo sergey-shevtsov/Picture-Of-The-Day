@@ -49,7 +49,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.settings -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, SettingsFragment.newInstance())
-                        .addToBackStack(null)
                         .commit()
                     true
                 }
