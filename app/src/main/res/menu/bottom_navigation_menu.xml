@@ -7,14 +7,9 @@
         android:title="@string/main" />
 
     <item
-        android:id="@+id/page_two"
-        android:icon="@drawable/ic_screen_two"
-        android:title="Page 2" />
-
-    <item
-        android:id="@+id/page_three"
-        android:icon="@drawable/ic_screen_three"
-        android:title="Page 3" />
+        android:id="@+id/mars"
+        android:icon="@drawable/ic_mars"
+        android:title="@string/mars" />
 
     <item
         android:id="@+id/settings"

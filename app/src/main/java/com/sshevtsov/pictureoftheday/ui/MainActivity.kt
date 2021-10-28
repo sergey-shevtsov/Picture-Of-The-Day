@@ -40,10 +40,7 @@ class MainActivity : AppCompatActivity() {
                         .commit()
                     true
                 }
-                R.id.page_two -> {
-                    true
-                }
-                R.id.page_three -> {
+                R.id.mars -> {
                     true
                 }
                 R.id.settings -> {
