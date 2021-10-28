@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.page_one -> {
+                R.id.main -> {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, MainFragment.newInstance())
