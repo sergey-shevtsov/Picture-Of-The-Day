@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import com.sshevtsov.pictureoftheday.databinding.SettingsFragmentBinding
-import com.sshevtsov.pictureoftheday.util.isDarkMode
-import com.sshevtsov.pictureoftheday.util.saveDarkModeInSharedPref
+import com.sshevtsov.pictureoftheday.util.DARK_MODE_KEY
+import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
+import com.sshevtsov.pictureoftheday.util.saveBooleanSettingInSharedPref
 
 class SettingsFragment : Fragment() {
 
@@ -36,10 +37,12 @@ class SettingsFragment : Fragment() {
     }
 
     private fun initDarkModeOption() {
-        binding.darkModeSwitch.isChecked = requireActivity().isDarkMode()
+        binding.darkModeSwitch.isChecked = requireActivity().getBooleanSettingFromSharedPref(
+            DARK_MODE_KEY
+        )
 
         binding.darkModeSwitch.setOnCheckedChangeListener { _, isChecked ->
-            requireActivity().saveDarkModeInSharedPref(isChecked)
+            requireActivity().saveBooleanSettingInSharedPref(DARK_MODE_KEY, isChecked)
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {

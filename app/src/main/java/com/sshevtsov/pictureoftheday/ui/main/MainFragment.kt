@@ -9,6 +9,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
 import com.sshevtsov.pictureoftheday.ui.main.api.PODViewPagerAdapter
+import com.sshevtsov.pictureoftheday.util.POD_DESCRIPTION_MODE_KEY
+import com.sshevtsov.pictureoftheday.util.POD_HD_MODE_KEY
+import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
+import com.sshevtsov.pictureoftheday.util.saveBooleanSettingInSharedPref
 
 class MainFragment : Fragment() {
 
@@ -32,7 +36,22 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initChips()
         initViewPager()
+    }
+
+    private fun initChips() {
+        binding.chipFilterDescription.isChecked =
+            requireActivity().getBooleanSettingFromSharedPref(POD_DESCRIPTION_MODE_KEY)
+        binding.chipFilterHdQuality.isChecked =
+            requireActivity().getBooleanSettingFromSharedPref(POD_HD_MODE_KEY)
+
+        binding.chipFilterDescription.setOnCheckedChangeListener { _, isChecked ->
+            requireActivity().saveBooleanSettingInSharedPref(POD_DESCRIPTION_MODE_KEY, isChecked)
+        }
+        binding.chipFilterHdQuality.setOnCheckedChangeListener { _, isChecked ->
+            requireActivity().saveBooleanSettingInSharedPref(POD_HD_MODE_KEY, isChecked)
+        }
     }
 
     private fun initViewPager() {

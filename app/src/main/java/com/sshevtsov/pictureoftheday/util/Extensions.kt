@@ -11,17 +11,19 @@ fun Long.convertToNasaApiDate(): String {
     return dateFormat.format(this)
 }
 
-const val DARK_MODE_KEY = "darkModeKey"
+const val DARK_MODE_KEY = "DARK_MODE"
+const val POD_DESCRIPTION_MODE_KEY = "POD_DESCRIPTION_MODE"
+const val POD_HD_MODE_KEY = "POD_HD_MODE"
 
-fun Activity.saveDarkModeInSharedPref(value: Boolean) {
+fun Activity.saveBooleanSettingInSharedPref(key: String, value: Boolean) {
     val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
     sharedPref?.let {
         val editor = it.edit()
-        editor.putBoolean(DARK_MODE_KEY, value)
+        editor.putBoolean(key, value)
         editor.apply()
     }
 }
 
-fun Activity.isDarkMode(): Boolean {
-    return this.getPreferences(Context.MODE_PRIVATE).getBoolean(DARK_MODE_KEY, false)
+fun Activity.getBooleanSettingFromSharedPref(key: String): Boolean {
+    return this.getPreferences(Context.MODE_PRIVATE).getBoolean(key, false)
 }

@@ -7,7 +7,8 @@ import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.ActivityMainBinding
 import com.sshevtsov.pictureoftheday.ui.main.MainFragment
 import com.sshevtsov.pictureoftheday.ui.settings.SettingsFragment
-import com.sshevtsov.pictureoftheday.util.isDarkMode
+import com.sshevtsov.pictureoftheday.util.DARK_MODE_KEY
+import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
 
 class MainActivity : AppCompatActivity() {
     private val binding: ActivityMainBinding by lazy {
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setSavedTheme() {
-        if (isDarkMode()) {
+        if (getBooleanSettingFromSharedPref(DARK_MODE_KEY)) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
