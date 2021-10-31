@@ -20,4 +20,7 @@
     <string name="mars_rover_description">Фотографии сделаны марсоходом Curiosity. Дата его прибытия на Марс - 06.08.2012.</string>
     <string name="mars_rover_selected_date">Показано фото за</string>
     <string name="select_date">Выберите дату</string>
+    <string name="wiki_search_icon_content_description">Найти в википедии</string>
+    <string name="wiki_search_helper_text">Найдите неизвестный термин</string>
+    <string name="wiki_search_hint">Поискать в Википедии</string>
 </resources>

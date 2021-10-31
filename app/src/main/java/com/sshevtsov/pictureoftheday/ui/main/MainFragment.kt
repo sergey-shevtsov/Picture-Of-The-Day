@@ -1,5 +1,7 @@
 package com.sshevtsov.pictureoftheday.ui.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -40,8 +42,18 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initWikiSearch()
         initChips()
         initViewPager()
+    }
+
+    private fun initWikiSearch() {
+        binding.textInputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.textInputEditText.text.toString()}")
+            })
+        }
     }
 
     private fun initChips() {

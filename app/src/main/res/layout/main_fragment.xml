@@ -23,17 +23,30 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/side_guideline_size" />
 
-        <TextView
-            android:id="@+id/header"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/pod_header_margin_top"
-            android:gravity="center"
-            android:text="@string/pod_header_text"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:hint="@string/wiki_search_hint"
+            app:counterEnabled="true"
+            app:counterMaxLength="20"
+            app:endIconContentDescription="@string/wiki_search_icon_content_description"
+            app:endIconDrawable="@drawable/ic_wikipedia"
+            app:endIconMode="custom"
+            app:helperText="@string/wiki_search_helper_text"
+            app:helperTextEnabled="true"
             app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintStart_toStartOf="@id/constraint_start"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/text_input_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="20" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chip_group"
@@ -42,7 +55,7 @@
             android:layout_marginTop="@dimen/main_chip_group_margin_top"
             app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintStart_toStartOf="@id/constraint_start"
-            app:layout_constraintTop_toBottomOf="@id/header">
+            app:layout_constraintTop_toBottomOf="@id/text_input_layout">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_filter_description"
