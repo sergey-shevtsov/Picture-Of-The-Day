@@ -35,8 +35,10 @@ class MarsRoverPhotosViewModel(
                             if (serverResponse.photos.isNullOrEmpty()) {
                                 liveDataToObserve.value =
                                     MarsRoverPhotosData.Error(Throwable("No photo for the selected date"))
+                            } else {
+                                liveDataToObserve.value =
+                                    MarsRoverPhotosData.Success(serverResponse)
                             }
-                            liveDataToObserve.value = MarsRoverPhotosData.Success(serverResponse)
                         } else {
                             val message = response.message()
                             liveDataToObserve.value = if (message.isNullOrBlank()) {
