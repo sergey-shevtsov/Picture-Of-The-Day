@@ -1,13 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.mars.MarsFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Mars fragment" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_start"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/side_guideline_size" />
 
-</FrameLayout>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/constraint_end"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/side_guideline_size" />
+
+    <TextView
+        android:id="@+id/text_view_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/mars_rover_description"
+        app:layout_constraintEnd_toEndOf="@id/constraint_end"
+        app:layout_constraintStart_toStartOf="@id/constraint_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_view_chosen_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/button_choose_date"
+        app:layout_constraintEnd_toEndOf="@id/constraint_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/constraint_start"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_description"
+        tools:text="Показано фото за 10.08.2020" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_choose_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_date"
+        app:layout_constraintBottom_toTopOf="@+id/button_random_date"
+        app:layout_constraintEnd_toEndOf="@id/constraint_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/constraint_start"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_chosen_date" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_random_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/random_date"
+        app:layout_constraintBottom_toTopOf="@+id/image_view"
+        app:layout_constraintEnd_toEndOf="@id/constraint_end"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/constraint_start"
+        app:layout_constraintTop_toBottomOf="@+id/button_choose_date" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_view"
+        android:layout_width="0dp"
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_no_photo_vector" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

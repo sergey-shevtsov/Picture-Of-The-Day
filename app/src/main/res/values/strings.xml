@@ -15,4 +15,7 @@
     <string name="settings">Настройки</string>
     <string name="main">Главная</string>
     <string name="mars">Марс</string>
+    <string name="random_date">Случайно</string>
+    <string name="choose_date">Выбрать дату</string>
+    <string name="mars_rover_description">Фотографии сделаны марсоходом Curiosity. Дата его прибытия на Марс - 06.08.2012.</string>
 </resources>
