@@ -14,4 +14,5 @@
     <dimen name="settings_header_margin_top">10dp</dimen>
     <dimen name="pod_header_margin_top">4dp</dimen>
     <dimen name="pod_tab_layout_margin_top">8dp</dimen>
+    <dimen name="mars_image_height">400dp</dimen>
 </resources>
