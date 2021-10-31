@@ -37,9 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="11dp"
-            android:alpha="0"
+            android:alpha="1"
             app:layout_constraintBottom_toBottomOf="@id/constraint_search_field"
-            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_wikipedia" />
 
@@ -48,7 +48,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:alpha="1"
+            android:alpha="0"
             android:hint="@string/wiki_search_hint"
             app:counterEnabled="true"
             app:counterMaxLength="20"
@@ -57,7 +57,7 @@
             app:endIconMode="custom"
             app:helperText="@string/wiki_search_helper_text"
             app:helperTextEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@id/constraint_search_field"
+            app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintStart_toStartOf="@id/constraint_start">
 
@@ -76,7 +76,7 @@
             android:layout_marginTop="@dimen/main_chip_group_margin_top"
             app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintStart_toStartOf="@id/constraint_start"
-            app:layout_constraintTop_toBottomOf="@id/constraint_search_field">
+            app:layout_constraintTop_toTopOf="@id/constraint_search_field">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_filter_description"
