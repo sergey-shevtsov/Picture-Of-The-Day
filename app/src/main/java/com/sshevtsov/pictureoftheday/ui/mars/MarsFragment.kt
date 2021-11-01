@@ -71,7 +71,12 @@ class MarsFragment : Fragment() {
                         binding.imageView.load(R.drawable.ic_no_photo_vector)
                     }
                     is MarsRoverPhotosData.Success -> {
-                        val url = data.serverResponseData.photos?.get(0)?.imageSrc
+                        var url = data.serverResponseData.photos?.get(0)?.imageSrc
+
+                        if (url!![4] != 's') {
+                            url = url.replaceRange(0, 4, "https")
+                        }
+
                         binding.imageView.load(url) {
                             lifecycle(this@MarsFragment)
                             error(R.drawable.ic_load_error_vector)
