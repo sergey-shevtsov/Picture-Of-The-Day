@@ -2,6 +2,8 @@ package com.sshevtsov.pictureoftheday.util
 
 import android.app.Activity
 import android.content.Context
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -26,4 +28,9 @@ fun Activity.saveBooleanSettingInSharedPref(key: String, value: Boolean) {
 
 fun Activity.getBooleanSettingFromSharedPref(key: String): Boolean {
     return this.getPreferences(Context.MODE_PRIVATE).getBoolean(key, false)
+}
+
+fun Context.hideKeyboard(view: View?) {
+    val inputMethodManager = this.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
 }

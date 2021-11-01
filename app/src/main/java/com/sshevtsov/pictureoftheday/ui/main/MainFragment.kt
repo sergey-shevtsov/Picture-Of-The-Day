@@ -6,15 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
 import com.sshevtsov.pictureoftheday.ui.main.api.PODViewPagerAdapter
-import com.sshevtsov.pictureoftheday.util.POD_DESCRIPTION_MODE_KEY
-import com.sshevtsov.pictureoftheday.util.POD_HD_MODE_KEY
-import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
-import com.sshevtsov.pictureoftheday.util.saveBooleanSettingInSharedPref
+import com.sshevtsov.pictureoftheday.util.*
 
 class MainFragment : Fragment() {
 
@@ -43,6 +42,7 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initWikiSearch()
+        initAnimationListeners()
         initChips()
         initViewPager()
     }
@@ -54,6 +54,19 @@ class MainFragment : Fragment() {
                     Uri.parse("https://en.wikipedia.org/wiki/${binding.textInputEditText.text.toString()}")
             })
         }
+    }
+
+    private fun initAnimationListeners() {
+        binding.main.setTransitionListener(object : TransitionAdapter() {
+            override fun onTransitionCompleted(motionLayout: MotionLayout?, currentId: Int) {
+                when (currentId) {
+                    R.id.closed -> {
+                        context?.hideKeyboard(binding.textInputEditText)
+                        binding.textInputEditText.clearFocus()
+                    }
+                }
+            }
+        })
     }
 
     private fun initChips() {
