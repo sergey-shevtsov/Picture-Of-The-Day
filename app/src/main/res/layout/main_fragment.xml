@@ -24,24 +24,13 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="@dimen/side_guideline_size" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/constraint_search_field"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.15" />
-
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/wiki_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="11dp"
-            android:alpha="0"
+            android:layout_marginBottom="16dp"
             android:tint="?attr/imageButtonColor"
-            app:layout_constraintBottom_toBottomOf="@id/constraint_search_field"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_wikipedia" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -49,7 +38,6 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:alpha="1"
             android:hint="@string/wiki_search_hint"
             app:counterEnabled="true"
             app:counterMaxLength="20"
@@ -57,10 +45,7 @@
             app:endIconDrawable="@drawable/ic_wikipedia"
             app:endIconMode="custom"
             app:helperText="@string/wiki_search_helper_text"
-            app:helperTextEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@id/constraint_search_field"
-            app:layout_constraintEnd_toEndOf="@id/constraint_end"
-            app:layout_constraintStart_toStartOf="@id/constraint_start">
+            app:helperTextEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_edit_text"
@@ -77,7 +62,7 @@
             android:layout_marginTop="@dimen/main_chip_group_margin_top"
             app:layout_constraintEnd_toEndOf="@id/constraint_end"
             app:layout_constraintStart_toStartOf="@id/constraint_start"
-            app:layout_constraintTop_toBottomOf="@id/constraint_search_field">
+            app:layout_constraintTop_toBottomOf="@id/text_input_layout">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_filter_description"

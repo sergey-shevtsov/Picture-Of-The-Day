@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto">
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/closed">
+
+        <Constraint
+            android:id="@id/text_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/wiki_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_input_layout"
+            app:layout_constraintEnd_toEndOf="@id/constraint_end"
+            app:layout_constraintTop_toTopOf="@id/text_input_layout" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/opened">
+
+        <Constraint
+            android:id="@id/text_input_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@id/constraint_end"
+            app:layout_constraintStart_toStartOf="@id/constraint_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/wiki_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/text_input_layout"
+            app:layout_constraintTop_toTopOf="@id/text_input_layout"
+            motion:layout_constraintEnd_toStartOf="parent" />
+
+    </ConstraintSet>
 
     <Transition
-        motion:constraintSetStart="@layout/main_fragment_start"
-        motion:constraintSetEnd="@layout/main_fragment"
-        motion:duration="200">
+        motion:constraintSetEnd="@id/opened"
+        motion:constraintSetStart="@id/closed"
+        motion:duration="250">
 
-        <OnClick motion:targetId="@id/wiki_button"/>
+        <OnSwipe
+            motion:dragDirection="dragLeft"
+            motion:onTouchUp="autoComplete"
+            motion:touchAnchorId="@id/wiki_button"
+            motion:touchAnchorSide="left"
+            motion:touchRegionId="@id/wiki_button" />
+    </Transition>
+
+    <Transition
+        motion:constraintSetEnd="@id/closed"
+        motion:constraintSetStart="@id/opened"
+        motion:duration="250">
+
+        <OnSwipe
+            motion:dragDirection="dragRight"
+            motion:onTouchUp="autoComplete"
+            motion:touchAnchorId="@id/text_input_layout"
+            motion:touchAnchorSide="right"
+            motion:touchRegionId="@id/text_input_layout" />
     </Transition>
 
 </MotionScene>
