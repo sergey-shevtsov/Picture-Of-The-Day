@@ -2,4 +2,5 @@
 <resources>
     <attr name="bottomSheetDialogBackgroundColor" format="color"/>
     <attr name="bottomSheetDialogHeaderTextColor" format="color"/>
+    <attr name="imageButtonColor" format="color"/>
 </resources>

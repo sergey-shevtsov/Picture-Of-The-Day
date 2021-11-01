@@ -14,5 +14,6 @@
         <!-- Customize your theme here. -->
         <item name="bottomSheetDialogBackgroundColor">@color/dark_grey</item>
         <item name="bottomSheetDialogHeaderTextColor">@color/white</item>
+        <item name="imageButtonColor">@color/white</item>
     </style>
 </resources>
