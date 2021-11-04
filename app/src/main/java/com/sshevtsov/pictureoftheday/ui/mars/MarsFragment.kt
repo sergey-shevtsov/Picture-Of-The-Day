@@ -1,5 +1,6 @@
 package com.sshevtsov.pictureoftheday.ui.mars
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -84,11 +85,28 @@ class MarsFragment : Fragment() {
                         binding.imageView.load(url) {
                             lifecycle(this@MarsFragment)
                             error(R.drawable.ic_load_error_vector)
+                            listener(
+                                onSuccess = { _, _ ->
+                                    ObjectAnimator
+                                        .ofFloat(binding.imageView, "alpha", 0f, 1f)
+                                        .setDuration(500)
+                                        .start()
+                                }
+                            )
                         }
                     }
                     is MarsRoverPhotosData.Error -> {
                         binding.loadingInclude.loadingLayout.visibility = View.GONE
-                        binding.imageView.load(R.drawable.ic_load_error_vector)
+                        binding.imageView.load(R.drawable.ic_load_error_vector) {
+                            listener(
+                                onSuccess = { _, _ ->
+                                    ObjectAnimator
+                                        .ofFloat(binding.imageView, "alpha", 0f, 1f)
+                                        .setDuration(250)
+                                        .start()
+                                }
+                            )
+                        }
                         Toast.makeText(context, data.error.message, Toast.LENGTH_SHORT).show()
                     }
                 }
