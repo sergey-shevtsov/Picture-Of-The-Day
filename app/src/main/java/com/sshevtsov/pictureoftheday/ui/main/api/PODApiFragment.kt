@@ -72,7 +72,6 @@ class PODApiFragment : Fragment() {
         when (data) {
             is PictureOfTheDayData.Success -> {
                 binding.apply {
-                    binding.loadingInclude.loadingLayout.visibility = View.GONE
 
                     val url = if (hdQualitySetting) {
                         data.serverResponseData.hdurl
@@ -85,6 +84,7 @@ class PODApiFragment : Fragment() {
                         error(R.drawable.ic_load_error_vector)
                         listener(
                             onSuccess = { _, _ ->
+                                binding.loadingInclude.loadingLayout.visibility = View.GONE
                                 imageView.animate()
                                     .setDuration(500)
                                     .alpha(1f)

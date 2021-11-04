@@ -74,8 +74,6 @@ class MarsFragment : Fragment() {
                         binding.imageView.clear()
                     }
                     is MarsRoverPhotosData.Success -> {
-                        binding.loadingInclude.loadingLayout.visibility = View.GONE
-
                         var url = data.serverResponseData.photos?.get(0)?.imageSrc
 
                         if (url!![4] != 's') {
@@ -87,6 +85,7 @@ class MarsFragment : Fragment() {
                             error(R.drawable.ic_load_error_vector)
                             listener(
                                 onSuccess = { _, _ ->
+                                    binding.loadingInclude.loadingLayout.visibility = View.GONE
                                     ObjectAnimator
                                         .ofFloat(binding.imageView, "alpha", 0f, 1f)
                                         .setDuration(500)
