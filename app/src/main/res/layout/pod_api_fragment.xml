@@ -14,6 +14,7 @@
             android:layout_height="@dimen/main_image_height"
             android:layout_marginTop="@dimen/main_image_margin_top"
             android:contentDescription="@string/photo_of_the_day_stub"
+            android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

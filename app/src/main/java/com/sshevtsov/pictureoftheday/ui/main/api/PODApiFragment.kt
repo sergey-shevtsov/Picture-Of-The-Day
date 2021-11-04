@@ -83,6 +83,13 @@ class PODApiFragment : Fragment() {
                     imageView.load(url) {
                         lifecycle(this@PODApiFragment)
                         error(R.drawable.ic_load_error_vector)
+                        listener(
+                            onSuccess = { _, _ ->
+                                imageView.animate()
+                                    .setDuration(500)
+                                    .alpha(1f)
+                            }
+                        )
                     }
 
                     if (showDescriptionSetting) {
