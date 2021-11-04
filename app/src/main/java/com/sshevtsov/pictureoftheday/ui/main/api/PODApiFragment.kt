@@ -72,6 +72,8 @@ class PODApiFragment : Fragment() {
         when (data) {
             is PictureOfTheDayData.Success -> {
                 binding.apply {
+                    binding.loadingInclude.loadingLayout.visibility = View.GONE
+
                     val url = if (hdQualitySetting) {
                         data.serverResponseData.hdurl
                     } else {
@@ -81,7 +83,6 @@ class PODApiFragment : Fragment() {
                     imageView.load(url) {
                         lifecycle(this@PODApiFragment)
                         error(R.drawable.ic_load_error_vector)
-                        placeholder(R.drawable.ic_no_photo_vector)
                     }
 
                     if (showDescriptionSetting) {
@@ -94,10 +95,11 @@ class PODApiFragment : Fragment() {
                 }
             }
             is PictureOfTheDayData.Loading -> {
-                binding.imageView.load(R.drawable.ic_no_photo_vector)
+                binding.loadingInclude.loadingLayout.visibility = View.VISIBLE
                 bottomSheetDialog.state = BottomSheetBehavior.STATE_HIDDEN
             }
             is PictureOfTheDayData.Error -> {
+                binding.loadingInclude.loadingLayout.visibility = View.GONE
                 binding.imageView.load(R.drawable.ic_load_error_vector)
             }
         }

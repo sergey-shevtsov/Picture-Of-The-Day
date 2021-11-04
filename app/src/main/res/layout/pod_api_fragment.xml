@@ -16,8 +16,15 @@
             android:contentDescription="@string/photo_of_the_day_stub"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_no_photo_vector" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/loading_include"
+            layout="@layout/loading_layout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

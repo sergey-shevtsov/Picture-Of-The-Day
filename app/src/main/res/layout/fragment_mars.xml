@@ -56,19 +56,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/random_date"
-        app:layout_constraintBottom_toTopOf="@+id/image_view"
+        app:layout_constraintBottom_toTopOf="@+id/image_container"
         app:layout_constraintEnd_toEndOf="@id/constraint_end"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/constraint_start"
         app:layout_constraintTop_toBottomOf="@+id/button_choose_date" />
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/image_view"
+    <FrameLayout
+        android:id="@+id/image_container"
         android:layout_width="0dp"
-        android:layout_height="@dimen/mars_image_height"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_no_photo_vector" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <include
+            android:id="@+id/loading_include"
+            layout="@layout/loading_layout" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

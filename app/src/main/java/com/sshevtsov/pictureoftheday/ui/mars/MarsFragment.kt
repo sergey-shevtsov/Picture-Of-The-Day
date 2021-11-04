@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import coil.api.clear
 import coil.api.load
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -68,9 +69,12 @@ class MarsFragment : Fragment() {
             .observe(viewLifecycleOwner) { data ->
                 when (data) {
                     is MarsRoverPhotosData.Loading -> {
-                        binding.imageView.load(R.drawable.ic_no_photo_vector)
+                        binding.loadingInclude.loadingLayout.visibility = View.VISIBLE
+                        binding.imageView.clear()
                     }
                     is MarsRoverPhotosData.Success -> {
+                        binding.loadingInclude.loadingLayout.visibility = View.GONE
+
                         var url = data.serverResponseData.photos?.get(0)?.imageSrc
 
                         if (url!![4] != 's') {
@@ -80,10 +84,10 @@ class MarsFragment : Fragment() {
                         binding.imageView.load(url) {
                             lifecycle(this@MarsFragment)
                             error(R.drawable.ic_load_error_vector)
-                            placeholder(R.drawable.ic_no_photo_vector)
                         }
                     }
                     is MarsRoverPhotosData.Error -> {
+                        binding.loadingInclude.loadingLayout.visibility = View.GONE
                         binding.imageView.load(R.drawable.ic_load_error_vector)
                         Toast.makeText(context, data.error.message, Toast.LENGTH_SHORT).show()
                     }
