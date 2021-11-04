@@ -87,18 +87,17 @@ class MainFragment : Fragment() {
 
     private fun initViewPager() {
         binding.viewPager.adapter = viewPagerAdapter
-        binding.viewPager.currentItem = 2
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> {
-                    tab.text = getString(R.string.before_yesterday)
+                    tab.text = getString(R.string.today)
                 }
                 1 -> {
                     tab.text = getString(R.string.yesterday)
                 }
                 2 -> {
-                    tab.text = getString(R.string.today)
+                    tab.text = getString(R.string.before_yesterday)
                 }
             }
         }.attach()

@@ -8,9 +8,9 @@ import java.util.*
 
 class PODViewPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
     companion object {
-        private const val BEFORE_YESTERDAY_FRAGMENT = 0
+        private const val TODAY_FRAGMENT = 0
         private const val YESTERDAY_FRAGMENT = 1
-        private const val TODAY_FRAGMENT = 2
+        private const val BEFORE_YESTERDAY_FRAGMENT = 2
     }
 
     private val fragments = getFragmentsArray()
@@ -19,9 +19,9 @@ class PODViewPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(act
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> fragments[BEFORE_YESTERDAY_FRAGMENT]
+            0 -> fragments[TODAY_FRAGMENT]
             1 -> fragments[YESTERDAY_FRAGMENT]
-            2 -> fragments[TODAY_FRAGMENT]
+            2 -> fragments[BEFORE_YESTERDAY_FRAGMENT]
             else -> fragments[TODAY_FRAGMENT]
         }
     }
@@ -46,9 +46,9 @@ class PODViewPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(act
 
         // Возвращаем массив с POD фрагментами, куда передаем полученные даты
         return arrayOf(
-            PODApiFragment.newInstance(beforeYesterdayBundle),
+            PODApiFragment.newInstance(todayBundle),
             PODApiFragment.newInstance(yesterdayBundle),
-            PODApiFragment.newInstance(todayBundle)
+            PODApiFragment.newInstance(beforeYesterdayBundle)
         )
     }
 }
