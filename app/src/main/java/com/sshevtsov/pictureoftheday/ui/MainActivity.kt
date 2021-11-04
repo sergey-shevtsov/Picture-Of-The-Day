@@ -3,6 +3,7 @@ package com.sshevtsov.pictureoftheday.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.FragmentTransaction
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.ActivityMainBinding
 import com.sshevtsov.pictureoftheday.ui.main.MainFragment
@@ -38,12 +39,14 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager
                         .beginTransaction()
                         .replace(R.id.container, MainFragment.newInstance())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit()
                     true
                 }
                 R.id.mars -> {
                     supportFragmentManager
                         .beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .replace(R.id.container, MarsFragment.newInstance())
                         .commit()
                     true
@@ -51,6 +54,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.settings -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.container, SettingsFragment.newInstance())
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                         .commit()
                     true
                 }
