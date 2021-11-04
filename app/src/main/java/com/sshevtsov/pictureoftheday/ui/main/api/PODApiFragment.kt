@@ -1,11 +1,16 @@
 package com.sshevtsov.pictureoftheday.ui.main.api
 
+import android.animation.TimeInterpolator
+import android.graphics.Interpolator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.BounceInterpolator
+import android.view.animation.LinearInterpolator
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -87,6 +92,7 @@ class PODApiFragment : Fragment() {
                                 binding.loadingInclude.loadingLayout.visibility = View.GONE
                                 imageView.animate()
                                     .setDuration(500)
+                                    .setInterpolator(LinearOutSlowInInterpolator())
                                     .alpha(1f)
                             }
                         )
