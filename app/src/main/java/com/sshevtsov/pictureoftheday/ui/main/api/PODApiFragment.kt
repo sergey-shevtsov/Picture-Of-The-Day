@@ -43,6 +43,7 @@ class PODApiFragment : Fragment() {
     private lateinit var bottomSheetDialog: BottomSheetBehavior<ConstraintLayout>
 
     private var isExpanded = false
+    private var isFavorite = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -95,6 +96,10 @@ class PODApiFragment : Fragment() {
                                     .setDuration(500)
                                     .setInterpolator(LinearOutSlowInInterpolator())
                                     .alpha(1f)
+                                heartSwitch.animate()
+                                    .setDuration(500)
+                                    .setInterpolator(LinearOutSlowInInterpolator())
+                                    .translationX(0f)
                                 imageView.setOnClickListener {
                                     TransitionManager.beginDelayedTransition(
                                         imageContainer,

@@ -14,11 +14,22 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/main_image_height"
             android:layout_marginTop="@dimen/main_image_margin_top"
-            android:contentDescription="@string/photo_of_the_day_stub"
             android:alpha="0"
+            android:contentDescription="@string/photo_of_the_day_stub"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/heart_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/asl_heart_unfill"
+            android:contentDescription="@null"
+            android:thumb="@null"
+            android:translationX="80dp"
+            app:layout_constraintEnd_toEndOf="@id/image_view"
+            app:layout_constraintTop_toTopOf="@id/image_view" />
 
         <include
             android:id="@+id/loading_include"
