@@ -1,13 +1,12 @@
 package com.sshevtsov.pictureoftheday.ui.main.api
 
-import android.animation.TimeInterpolator
-import android.graphics.Interpolator
 import android.os.Bundle
+import android.transition.ChangeImageTransform
+import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.BounceInterpolator
-import android.view.animation.LinearInterpolator
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
@@ -42,6 +41,8 @@ class PODApiFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var bottomSheetDialog: BottomSheetBehavior<ConstraintLayout>
+
+    private var isExpanded = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -94,6 +95,19 @@ class PODApiFragment : Fragment() {
                                     .setDuration(500)
                                     .setInterpolator(LinearOutSlowInInterpolator())
                                     .alpha(1f)
+                                imageView.setOnClickListener {
+                                    TransitionManager.beginDelayedTransition(
+                                        imageContainer,
+                                        ChangeImageTransform()
+                                    )
+                                    imageView.scaleType = if (isExpanded) {
+                                        isExpanded = false
+                                        ImageView.ScaleType.FIT_CENTER
+                                    } else {
+                                        isExpanded = true
+                                        ImageView.ScaleType.CENTER_CROP
+                                    }
+                                }
                             }
                         )
                     }
