@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sshevtsov.pictureoftheday.R
-import com.sshevtsov.pictureoftheday.databinding.PodApiFragmentBinding
+import com.sshevtsov.pictureoftheday.databinding.FragmentPodApiBinding
 import com.sshevtsov.pictureoftheday.util.POD_DESCRIPTION_MODE_KEY
 import com.sshevtsov.pictureoftheday.util.POD_HD_MODE_KEY
 import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
@@ -37,7 +37,7 @@ class PODApiFragment : Fragment() {
     private var showDescriptionSetting: Boolean = true
     private var hdQualitySetting: Boolean = false
 
-    private var _binding: PodApiFragmentBinding? = null
+    private var _binding: FragmentPodApiBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var bottomSheetDialog: BottomSheetBehavior<ConstraintLayout>
@@ -50,7 +50,7 @@ class PODApiFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = PodApiFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentPodApiBinding.inflate(inflater, container, false)
         return binding.root
     }
 

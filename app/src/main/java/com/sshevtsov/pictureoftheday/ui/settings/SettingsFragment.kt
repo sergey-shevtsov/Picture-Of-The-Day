@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
-import com.sshevtsov.pictureoftheday.databinding.SettingsFragmentBinding
+import com.sshevtsov.pictureoftheday.databinding.FragmentSettingsBinding
 import com.sshevtsov.pictureoftheday.util.DARK_MODE_KEY
 import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
 import com.sshevtsov.pictureoftheday.util.saveBooleanSettingInSharedPref
@@ -17,7 +17,7 @@ class SettingsFragment : Fragment() {
         fun newInstance(): SettingsFragment = SettingsFragment()
     }
 
-    private var _binding: SettingsFragmentBinding? = null
+    private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = SettingsFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
 
         return binding.root
     }

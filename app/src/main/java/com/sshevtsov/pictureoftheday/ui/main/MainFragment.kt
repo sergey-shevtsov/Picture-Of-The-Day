@@ -11,7 +11,7 @@ import androidx.constraintlayout.motion.widget.TransitionAdapter
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.sshevtsov.pictureoftheday.R
-import com.sshevtsov.pictureoftheday.databinding.MainFragmentBinding
+import com.sshevtsov.pictureoftheday.databinding.FragmentMainBinding
 import com.sshevtsov.pictureoftheday.ui.main.api.PODViewPagerAdapter
 import com.sshevtsov.pictureoftheday.util.*
 
@@ -25,7 +25,7 @@ class MainFragment : Fragment() {
         PODViewPagerAdapter(requireActivity())
     }
 
-    private var _binding: MainFragmentBinding? = null
+    private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -33,7 +33,7 @@ class MainFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = MainFragmentBinding.inflate(inflater, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
 
         return binding.root
     }
