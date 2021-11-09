@@ -1,5 +1,7 @@
 package com.sshevtsov.pictureoftheday.ui.main.api
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -77,46 +79,53 @@ class PODApiFragment : Fragment() {
         when (data) {
             is PictureOfTheDayData.Success -> {
                 binding.apply {
-
-                    val url = if (hdQualitySetting) {
-                        data.serverResponseData.hdurl
+                    if (data.serverResponseData.mediaType.equals("video")) {
+                        data.serverResponseData.url?.let {
+                            binding.loadingInclude.loadingLayout.visibility = View.GONE
+                            renderVideoPreview(it)
+                        }
                     } else {
-                        data.serverResponseData.url
-                    }
+                        val url = if (hdQualitySetting) {
+                            data.serverResponseData.hdurl
+                        } else {
+                            data.serverResponseData.url
+                        }
 
-                    imageView.load(url) {
-                        lifecycle(this@PODApiFragment)
-                        error(R.drawable.ic_load_error_vector)
-                        listener(
-                            onSuccess = { _, _ ->
-                                binding.loadingInclude.loadingLayout.visibility = View.GONE
-                                imageView.animate()
-                                    .setDuration(500)
-                                    .setInterpolator(LinearOutSlowInInterpolator())
-                                    .alpha(1f)
-                                heartSwitch.animate()
-                                    .setDuration(500)
-                                    .setInterpolator(LinearOutSlowInInterpolator())
-                                    .translationX(0f)
-                                imageView.setOnClickListener {
-                                    val bundle = Bundle().apply {
-                                        putString(
-                                            ImageDetailFragment.IMAGE_URL_EXTRA,
-                                            data.serverResponseData.hdurl
-                                        )
+                        imageView.load(url) {
+                            lifecycle(this@PODApiFragment)
+                            error(R.drawable.ic_load_error_vector)
+                            listener(
+                                onSuccess = { _, _ ->
+                                    binding.loadingInclude.loadingLayout.visibility = View.GONE
+                                    imageView.animate()
+                                        .setDuration(500)
+                                        .setInterpolator(LinearOutSlowInInterpolator())
+                                        .alpha(1f)
+                                    heartSwitch.animate()
+                                        .setDuration(500)
+                                        .setInterpolator(LinearOutSlowInInterpolator())
+                                        .translationX(0f)
+
+                                    imageView.setOnClickListener {
+                                        val bundle = Bundle().apply {
+                                            putString(
+                                                ImageDetailFragment.IMAGE_URL_EXTRA,
+                                                data.serverResponseData.hdurl
+                                            )
+                                        }
+                                        requireActivity().supportFragmentManager
+                                            .beginTransaction()
+                                            .add(
+                                                R.id.container,
+                                                ImageDetailFragment.newInstance(bundle)
+                                            )
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                            .addToBackStack(null)
+                                            .commit()
                                     }
-                                    requireActivity().supportFragmentManager
-                                        .beginTransaction()
-                                        .add(
-                                            R.id.container,
-                                            ImageDetailFragment.newInstance(bundle)
-                                        )
-                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                                        .addToBackStack(null)
-                                        .commit()
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
 
                     if (showDescriptionSetting) {
@@ -136,6 +145,15 @@ class PODApiFragment : Fragment() {
                 binding.loadingInclude.loadingLayout.visibility = View.GONE
                 binding.imageView.load(R.drawable.ic_load_error_vector)
             }
+        }
+    }
+
+    private fun renderVideoPreview(url: String) {
+        binding.videoFrameLayout.visibility = View.VISIBLE
+        binding.buttonShowVideo.setOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(url)
+            })
         }
     }
 

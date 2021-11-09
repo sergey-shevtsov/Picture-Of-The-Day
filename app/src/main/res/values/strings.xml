@@ -24,4 +24,6 @@
     <string name="wiki_search_helper_text">Найдите неизвестный термин</string>
     <string name="wiki_search_hint">Поискать в Википедии</string>
     <string name="image_detail_content_description">Full image</string>
+    <string name="video_frame_button_text">Смотреть</string>
+    <string name="video_frame_description">Сервер NASA вместо изображения отправил видео. Нажмите кнопку ниже, чтобы посмотреть его на YouTube.</string>
 </resources>

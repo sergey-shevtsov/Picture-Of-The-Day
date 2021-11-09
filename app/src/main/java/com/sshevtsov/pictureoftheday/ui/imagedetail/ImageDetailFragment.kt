@@ -40,6 +40,7 @@ class ImageDetailFragment : Fragment() {
 
         arguments?.getString(IMAGE_URL_EXTRA)?.let { url ->
             binding.imageView.load(url) {
+                lifecycle(this@ImageDetailFragment)
                 listener(
                     onSuccess = { _, _ ->
                         binding.loadingInclude.loadingLayout.visibility = View.GONE

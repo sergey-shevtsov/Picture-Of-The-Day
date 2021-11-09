@@ -31,6 +31,34 @@
             app:layout_constraintEnd_toEndOf="@id/image_view"
             app:layout_constraintTop_toTopOf="@id/image_view" />
 
+        <LinearLayout
+            android:id="@+id/video_frame_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/video_frame_layout_padding_horizontal"
+            android:paddingEnd="@dimen/video_frame_layout_padding_horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/video_frame_description" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_show_video"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/button_show_video_margin_top"
+                android:text="@string/video_frame_button_text" />
+
+        </LinearLayout>
+
         <include
             android:id="@+id/loading_include"
             layout="@layout/loading_layout"
