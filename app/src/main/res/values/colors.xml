@@ -16,4 +16,5 @@
     <color name="light_grey">#f6f6fa</color>
     <color name="dark_grey">#242424</color>
     <color name="bottom_sheet_line_color">#663b4351</color>
+    <color name="transparent">#00FFFFFF</color>
 </resources>

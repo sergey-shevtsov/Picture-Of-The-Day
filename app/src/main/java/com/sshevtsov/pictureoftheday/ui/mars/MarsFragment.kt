@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import coil.api.clear
 import coil.api.load
@@ -14,6 +15,7 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.FragmentMarsBinding
+import com.sshevtsov.pictureoftheday.ui.imagedetail.ImageDetailFragment
 import com.sshevtsov.pictureoftheday.ui.mars.api.MarsRoverPhotosData
 import com.sshevtsov.pictureoftheday.ui.mars.api.MarsRoverPhotosViewModel
 import java.text.SimpleDateFormat
@@ -90,6 +92,24 @@ class MarsFragment : Fragment() {
                                         .ofFloat(binding.imageView, "alpha", 0f, 1f)
                                         .setDuration(500)
                                         .start()
+
+                                    binding.imageView.setOnClickListener {
+                                        val bundle = Bundle().apply {
+                                            putString(
+                                                ImageDetailFragment.IMAGE_URL_EXTRA,
+                                                url
+                                            )
+                                        }
+                                        requireActivity().supportFragmentManager
+                                            .beginTransaction()
+                                            .add(
+                                                R.id.container,
+                                                ImageDetailFragment.newInstance(bundle)
+                                            )
+                                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                            .addToBackStack(null)
+                                            .commit()
+                                    }
                                 }
                             )
                         }

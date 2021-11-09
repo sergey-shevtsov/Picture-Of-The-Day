@@ -1,20 +1,19 @@
 package com.sshevtsov.pictureoftheday.ui.main.api
 
 import android.os.Bundle
-import android.transition.ChangeImageTransform
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import androidx.lifecycle.ViewModelProvider
 import coil.api.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.FragmentPodApiBinding
+import com.sshevtsov.pictureoftheday.ui.imagedetail.ImageDetailFragment
 import com.sshevtsov.pictureoftheday.util.POD_DESCRIPTION_MODE_KEY
 import com.sshevtsov.pictureoftheday.util.POD_HD_MODE_KEY
 import com.sshevtsov.pictureoftheday.util.getBooleanSettingFromSharedPref
@@ -42,7 +41,6 @@ class PODApiFragment : Fragment() {
 
     private lateinit var bottomSheetDialog: BottomSheetBehavior<ConstraintLayout>
 
-    private var isExpanded = false
     private var isFavorite = false
 
     override fun onCreateView(
@@ -101,17 +99,21 @@ class PODApiFragment : Fragment() {
                                     .setInterpolator(LinearOutSlowInInterpolator())
                                     .translationX(0f)
                                 imageView.setOnClickListener {
-                                    TransitionManager.beginDelayedTransition(
-                                        imageContainer,
-                                        ChangeImageTransform()
-                                    )
-                                    imageView.scaleType = if (isExpanded) {
-                                        isExpanded = false
-                                        ImageView.ScaleType.FIT_CENTER
-                                    } else {
-                                        isExpanded = true
-                                        ImageView.ScaleType.CENTER_CROP
+                                    val bundle = Bundle().apply {
+                                        putString(
+                                            ImageDetailFragment.IMAGE_URL_EXTRA,
+                                            data.serverResponseData.hdurl
+                                        )
                                     }
+                                    requireActivity().supportFragmentManager
+                                        .beginTransaction()
+                                        .add(
+                                            R.id.container,
+                                            ImageDetailFragment.newInstance(bundle)
+                                        )
+                                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                        .addToBackStack(null)
+                                        .commit()
                                 }
                             }
                         )

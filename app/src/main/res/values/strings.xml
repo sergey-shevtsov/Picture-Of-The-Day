@@ -23,4 +23,5 @@
     <string name="wiki_search_icon_content_description">Найти в википедии</string>
     <string name="wiki_search_helper_text">Найдите неизвестный термин</string>
     <string name="wiki_search_hint">Поискать в Википедии</string>
+    <string name="image_detail_content_description">Full image</string>
 </resources>
