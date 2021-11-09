@@ -3,6 +3,7 @@ package com.sshevtsov.pictureoftheday.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.sshevtsov.pictureoftheday.R
 import com.sshevtsov.pictureoftheday.databinding.ActivityMainBinding
@@ -34,31 +35,40 @@ class MainActivity : AppCompatActivity() {
 
     private fun initBottomNavigation() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
+            if (item.isChecked && supportFragmentManager.backStackEntryCount == 0) {
+                return@setOnItemSelectedListener false
+            }
+            clearBackStack()
+
             when (item.itemId) {
                 R.id.main -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.container, MainFragment.newInstance())
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    replaceFragment(MainFragment.newInstance())
                     true
                 }
                 R.id.mars -> {
-                    supportFragmentManager
-                        .beginTransaction()
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .replace(R.id.container, MarsFragment.newInstance())
-                        .commit()
+                    replaceFragment(MarsFragment.newInstance())
                     true
                 }
                 R.id.settings -> {
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.container, SettingsFragment.newInstance())
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit()
+                    replaceFragment(SettingsFragment.newInstance())
                     true
                 }
                 else -> false
+            }
+        }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container, fragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+    }
+
+    private fun clearBackStack() {
+        supportFragmentManager.apply {
+            for (i in 0 until backStackEntryCount) {
+                popBackStack()
             }
         }
     }
