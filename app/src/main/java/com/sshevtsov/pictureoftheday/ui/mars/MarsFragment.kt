@@ -180,4 +180,9 @@ class MarsFragment : Fragment() {
                 getString(R.string.mars_rover_selected_date), sdf.format(selectedDate)
             )
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
